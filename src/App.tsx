@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { styled, createGlobalStyle, css } from 'styled-components';
 
 function App() {
@@ -109,6 +109,12 @@ function App() {
       document.getElementById(`key-${key}`)?.classList.remove('pressed');
     }, 100);
   };
+
+  useEffect(() => {
+    document.addEventListener('keydown', (e) => {
+      play(e.key.toUpperCase());
+    });
+  });
 
   return (
     <KeysStyle as='section'>
