@@ -116,19 +116,56 @@ function App() {
     });
   });
 
+  const map: Record<number, string> = {
+    1: 'A',
+    2: 'S',
+    3: 'D',
+    4: 'F',
+    5: 'G',
+    6: 'H',
+    7: 'J',
+    8: 'K',
+  };
+
+  function playSong1() {
+    const music = [
+      [6, 1000],
+      [5, 1000],
+      [3, 1000],
+      [5, 1000],
+      [8, 1000],
+      [6, 500],
+      [5, 500],
+      [6, 1000],
+    ];
+
+    let startTime = 0;
+    music.forEach((item) => {
+      setTimeout(() => {
+        play(map[item[0]]);
+      }, startTime);
+      startTime += item[1];
+    });
+  }
+
   return (
-    <KeysStyle as='section'>
-      {Object.keys(keys).map((item: any) => {
-        return (
-          <KeyStyle as='div' key={item}>
-            <div onClick={() => play(item)} id={`key-${item}`}>
-              <span>{item}</span>
-            </div>
-          </KeyStyle>
-        );
-      })}
-      <GlobalStyles />
-    </KeysStyle>
+    <div>
+      <KeysStyle as='section'>
+        {Object.keys(keys).map((item: any) => {
+          return (
+            <KeyStyle as='div' key={item}>
+              <div onClick={() => play(item)} id={`key-${item}`}>
+                <span>{item}</span>
+              </div>
+            </KeyStyle>
+          );
+        })}
+        <GlobalStyles />
+      </KeysStyle>
+      <div className='songs'>
+        <button onClick={() => playSong1()}>世上只有妈妈好</button>
+      </div>
+    </div>
   );
 }
 
