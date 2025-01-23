@@ -148,6 +148,32 @@ function App() {
     });
   }
 
+  function playMusic(music: number[][]) {
+    let startTime = 0;
+    music.forEach((item) => {
+      setTimeout(() => {
+        play(map[item[0]]);
+      }, startTime * 0.5);
+      startTime += item[1];
+    });
+  }
+
+  function playSong2() {
+    const music = [
+      [6, 1000],
+      [6, 1000],
+      [6, 1000],
+      [3, 500],
+      [6, 500],
+      [5, 1000],
+      [3, 500],
+      [2, 500],
+      [3, 1000],
+    ];
+
+    playMusic(music);
+  }
+
   return (
     <div>
       <KeysStyle as='section'>
@@ -164,6 +190,7 @@ function App() {
       </KeysStyle>
       <div className='songs'>
         <button onClick={() => playSong1()}>世上只有妈妈好</button>
+        <button onClick={() => playSong2()}>奢香夫人</button>
       </div>
     </div>
   );
