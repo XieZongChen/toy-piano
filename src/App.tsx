@@ -127,6 +127,16 @@ function App() {
     8: 'K',
   };
 
+  function playMusic(music: number[][], speed = 1) {
+    let startTime = 0;
+    music.forEach((item) => {
+      setTimeout(() => {
+        play(map[item[0]]);
+      }, startTime * speed);
+      startTime += item[1];
+    });
+  }
+
   function playSong1() {
     const music = [
       [6, 1000],
@@ -139,23 +149,7 @@ function App() {
       [6, 1000],
     ];
 
-    let startTime = 0;
-    music.forEach((item) => {
-      setTimeout(() => {
-        play(map[item[0]]);
-      }, startTime);
-      startTime += item[1];
-    });
-  }
-
-  function playMusic(music: number[][]) {
-    let startTime = 0;
-    music.forEach((item) => {
-      setTimeout(() => {
-        play(map[item[0]]);
-      }, startTime * 0.5);
-      startTime += item[1];
-    });
+    playMusic(music);
   }
 
   function playSong2() {
@@ -171,7 +165,7 @@ function App() {
       [3, 1000],
     ];
 
-    playMusic(music);
+    playMusic(music, 0.5);
   }
 
   return (
