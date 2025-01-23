@@ -112,6 +112,8 @@ function App() {
 
   useEffect(() => {
     document.addEventListener('keydown', (e) => {
+      // 如果是持续按着一个键，则第一次之后的触发都不调用 play，防止持续发音
+      if (e.repeat) return;
       play(e.key.toUpperCase());
     });
   });
