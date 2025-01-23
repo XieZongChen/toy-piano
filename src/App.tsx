@@ -116,6 +116,7 @@ function App() {
     });
   });
 
+  // 简谱映射到琴键
   const map: Record<number, string> = {
     1: 'A',
     2: 'S',
@@ -127,6 +128,11 @@ function App() {
     8: 'K',
   };
 
+  /**
+   * 演奏音乐方法
+   * @param music 音节和音节长度组成的二维数组
+   * @param speed 调整整首曲子的速度
+   */
   function playMusic(music: number[][], speed = 1) {
     let startTime = 0;
     music.forEach((item) => {
