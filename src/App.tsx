@@ -34,6 +34,9 @@ function App() {
     body {
       background: #000;
     }
+    .pressed {
+      background: #aaa;
+    }
   `;
 
   // styled.xxx 写样式组件
@@ -91,7 +94,7 @@ function App() {
      * 以下设置为了在按一个琴键时，发出的声音更自然
      * 按每个键声音都是一秒，但这一秒内有音量从小到大再到小的变化
      */
-    osc.frequency.value = frequency;  // 设置频率
+    osc.frequency.value = frequency; // 设置频率
     gain.gain.setValueAtTime(0, context.currentTime); // 在 currentTime 设置音量为 0
     gain.gain.linearRampToValueAtTime(1, context.currentTime + 0.01); // currentTime + 0.01 秒设置音量为 1，也就是声音是逐渐变大的（linear 是线性）
 
@@ -99,15 +102,20 @@ function App() {
 
     gain.gain.exponentialRampToValueAtTime(0.001, context.currentTime + 1); // currentTime + 1 秒后设置音量为 0.001，也就是声音指数级的变小。（exponential 是指数级）
     osc.stop(context.currentTime + 1); // start 到 stop 间隔 1 秒
+
+    // 琴键按键样式
+    document.getElementById(`key-${key}`)?.classList.add('pressed');
+    setTimeout(() => {
+      document.getElementById(`key-${key}`)?.classList.remove('pressed');
+    }, 100);
   };
 
-  
   return (
     <KeysStyle as='section'>
       {Object.keys(keys).map((item: any) => {
         return (
           <KeyStyle as='div' key={item}>
-            <div onClick={() => play(item)}>
+            <div onClick={() => play(item)} id={`key-${item}`}>
               <span>{item}</span>
             </div>
           </KeyStyle>
